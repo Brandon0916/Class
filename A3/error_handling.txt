@@ -1,0 +1,9 @@
+This is the error handling file. 
+
+1. using get_lines functions need to first define the variable names and do not use whlie loop when check the lines.  if there is no msg need to catch the commandException. 
+
+2.I use the CommandException to aviod there is no command appear in the test files. This should be very careful for get the parameter and format. So when you define the function that names do_command, you need to consider all the situation that will happens. 
+
+3. for the calander. if you using re.compile to get the date, you need be careful with how the date is writing in the test file. 
+
+4. becaful with the get_lines functions. I made mistake that could not get the right length of the input line. 
