@@ -1,6 +1,6 @@
 # Pong V3
 
-import pygame, sys, time
+import    pygame, sys, time
 from pygame.locals import *
 
 # User-defined classes
@@ -103,7 +103,7 @@ def moveBall(surface, center, radius, speed, player1, player2, scores):
 
       #Check Collision for score
      
-      # if the x value of the ball passes the radius line, add a point
+      # if the x va  lue of the ball passes the radius line, add a point
       # There are exceptions for if the ball goes past the window border
       # just in case the speed is so great it doesn't exactly = the border
       if center[0] >= size[0]-radius:
