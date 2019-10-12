@@ -1,0 +1,2 @@
+Accuracy of traindata:  0.9658385093167702
+Accuracy of testdata:  0.801980198019802
