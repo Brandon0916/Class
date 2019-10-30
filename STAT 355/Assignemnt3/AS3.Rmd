@@ -1,0 +1,164 @@
+---
+title: "Stat 355  Assignment3"
+author: "Zimeng Ming V00844078"
+date: "2019/10/15"
+output: html_document
+---
+
+## Multiple regression and Dummy Variables, Section 11.2
+
+### Instructions:
+1. Complete your assignment in R Markdown using this file as a template.
+Insert R code in the R chunks, and type in your response after the
+corresponding R chunk leaving one blank line between the R chunk and
+your comments. 
+2. Execute each line of code separately to ensure that it works properly.
+3. Either [knit the entire document to pdf] or [knit to HTML or Word and print to pdf].
+4. Submit the pdf file to CourseSpaces in the Assignment 3 activity.
+
+### Data Description:
+Question 11.Review.15(new book)  11.Review.17(old book)
+
+In a study, subjects were preterm infant with low birth weights born in
+three different hospitals.  The variables are:   
+
+    WEIGHT:  weight in kg  (Y variable)  
+    WEEKS:  gestation age in weeks  
+    HOSP:  Hospital of birth, A, B or C  
+
+0.  Read the data into R using the read.csv function. 
+```{r OptionsReadIn}
+knitr::opts_chunk$set(fig.width=8, fig.height=6) #set size of graphs
+HOSPB<-read.csv('REV_C11_17.csv')
+dim(HOSPB)
+HOSPB$HOSPn <- as.numeric(HOSPB$HOSP)  #create a numeric HOSP for plotting
+```
+
+<hr>
+<b> Questions: </b>
+
+1.  Provide descriptive statistics and a pairs plot for the data.  
+Comment on your results and especially on any unusual features in the data. (3 marks)
+```{r SummaryPairs}
+summary(HOSPB)
+plot(HOSPB)
+  
+
+```
+Comment: <br>
+From the data summary, We can know the min value for weight is 0.7 and the mean is higher then median,so it is a little bit skew to left,the max value is 1.9.
+
+The min value for Week is 26 and the mean is a little higher then median but not too much ,so it is seems normal distribution,the max value is 36.
+
+The min value for HOSPn is 1 and the max value is 3, seems normal distribution since the median and mean and the 1st qu are looks 1/3 for the 3rd qu. 
+
+Also from the pairs plot, it is very clearly that only weight and weeks are looks has linear reationships, the others are no relationship with other variables.
+<hr>
+
+
+<b>2.</b>  Provide summary statistics of the dataset by HOSP and comment.  (3 marks)
+```{r byHOSP}
+HOSPB$HOSP<-as.factor(HOSPB$HOSP)
+by(HOSPB,HOSPB$HOSP,summary)
+```
+Comment: 
+There are 15 A's , 14 B's and 11 C's in the data. As for the HOSPn, A is 1, B is 2 and C is 3.
+
+As for A, The minimum weight is 0.7 and the median is lower then mean, the max weight is 1.4. In terms of week, the weeks range is from 26 to 35, the median and mean are close but mean is a little bit higher then median. 
+
+As for B, The minimum weight is 0.8 and the median is higher then mean, the max weight is 1.9. In terms of week, the weeks range is from 27 to 36, the median and mean are close but mean is a little bit lower then median. 
+
+As for B, The minimum weight is 1.0 and the median is higher then mean, the max weight is 1.7. In terms of week, the weeks range is from 28 to 36, the median and mean are close but mean is a little bit higher then median. 
+
+According to those three data, we can see that the Hospital C has less range of weight, but the Hosiptal B has the highest average on mean and median as well. Also Hospital C has less range of weeks and it also has the highest median and mean weeks in three hospital. 
+
+
+<hr>
+3.  Provide a scatterplot of WEIGHT versus WEEKS, using a different plotting
+character and colour for each of the three hospitals.  Comment on the graph. (2 marks)
+
+
+```{r}
+with(HOSPB,plot(WEEKS, WEIGHT, pch=HOSPn, col=(1 + HOSPn),
+     ylab='WEIGHT',xlab='WEEKS', main="scatterplot of WEIGHT versus WEEKS"))
+
+legend('topleft', c('A', 'B','C'), pch=1:3, col=c(1,3), 
+       bty="n")
+
+```
+
+
+Comment:<br>
+From the graph, the red circle is represent Hosipital A, the blue cross is represent Hosipital B, the green triangle is represent Hosipital C
+
+As we can see from the graph, the hospital A,B,C are all looks have the linear relationships for weight and weeks. The hospital B are looks very clearly has an model line, Hosipital A has very large variance and the model is not clearly. Hosiptal C are looks has linear models between weight and weeks.
+
+<hr>
+4.	Fit parallel lines model for WEIGHT versus WEEKS, where the intercepts may differ
+by HOSP but the slopes are the same.  Provide a summary of the model and comment. (4 marks)
+```{r Parallel}
+fit_WW<-lm(HOSPB$WEIGHT~HOSPB$WEEKS+HOSPB$HOSP)
+summary(fit_WW)
+```
+Comment:<br>
+The estimate model line is WEIGHT=-1.324633 +0.079755*WEEKS +0.266602*HOSPB+ 0.083405*HOSPC+Error
+
+The Degree of freedom is 36, the R_square is 0.7821 
+
+From the F-test: p-value is very small, so we have strong evidence to against H0, we can conclude at least one of the beta is significant. 
+
+From the sumamry, we can see that the p-vlaue for beta1 is really low  so we have strong evidence against H0, so we can say the slope for Weeks(beta1) is significant. 
+
+But we can see that only the weight and weeks for hospital B and C are looks has linear models, beta(HOSPB) is very small so we have strong evidence agianst H0 and also the p-value for the hosipital C is bigger then 0.05. So we can conclude only the beta for hospital B is significant.
+
+<hr>
+
+
+
+5.	Fit a model for WEIGHT versus WEEKS, where the intercepts and slopes may differ
+by HOSP.  Provide a summary of the model and comment. (4 marks)
+```{r DifSlopes}
+fit_gww<-lm(HOSPB$WEIGHT~HOSPB$WEEKS+HOSPB$HOSP+HOSPB$WEEKS*HOSPB$HOSP)
+summary(fit_gww)
+```
+The estimate model line is WEIGHT=-0.39278 +0.04876*WEEKS -1.56716*HOSPB-0.74327  *HOSPC+0.05976WEEKS*HOSPB+0.02772WEEKS*HOSPC+Error
+
+The Degree of freedom is 34, the R_square is  0.8336
+
+From the F-test: p-value is very small, so we have strong evidence to against H0, we can conclude at least one of the betas is significant. 
+
+From the sumamry, we can see that the p-vlaue for beta1(WEEKS) is really low  so we have strong evidence against H0, so we can say the slope for Weeks(beta1) is significant. 
+
+As for the p-values of HOSPB and WEEKS*HOSPB is very small, so we have strong evidence against H0, so we can conclude that those two betas are significant. However, the P-value is very high when the HOSPC in the model, so beta(HOSPC) and beta(WEEKS*HOSPC) are not significant.
+
+
+<hr>
+6.  Provide a scatterplot of WEIGHT versus WEEKS, using a different plotting
+character and colour for each of the three hospitals.  Overlay the fitted lines from
+the model in Question 5. (2 marks)
+```{r DifSlopesScatter}
+
+with(HOSPB,plot(WEEKS, WEIGHT, pch=HOSPn, col=(1 + HOSPn),
+     xlab='WEEKS',ylab='WEIGHT', main="scatterplot of WEIGHT versus WEEKS"))
+
+legend('topleft', c('A', 'B','C'), pch=1:3, col=c(1,3), 
+       bty="n")
+
+
+ww<-coef(fit_gww)
+ww
+abline(ww[1], ww[2], col=1)
+abline(ww[1] + ww[3], ww[2] + ww[5], col=2)
+abline(ww[1] + ww[4], ww[2] + ww[6], col=3)
+
+```
+<hr>
+
+
+7.  Compare the models in Questions 4 and 5.  Which one model would you present to your boss and why? (3 marks)
+```{r}
+anova(fit_WW,fit_gww)
+```
+
+Comment:<br>
+As the P-value is less then 0.05, we have strong evidence against H0, that we can use the model 2 which is WEIGHT~WEEKS+HOSP+WEEKS*HOSP is significant. 

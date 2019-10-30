@@ -1,0 +1,3 @@
+"0","#get the linear model of set 1"
+"0","set2_lm<-lm(anscombe$Set2y~anscombe$Set2x)"
+"0","abline(set2_lm)"

@@ -1,0 +1,158 @@
+---
+title: 'Stat355, Assignment #2, due: Friday, October 4 in class'
+author: "Zimeng Ming V00844078"
+date: "`r Sys.Date()`"
+
+---
+
+## Multiple regression, Section 10.1 - 10.3
+
+### Instructions:
+1. Complete your assignment in R Markdown using this file as a template.
+Insert R code in the R chunks, and type in your response after the
+corresponding R chunk leaving one blank line between the R chunk and
+your comments. 
+2. Execute each line of code separately to ensure that it works properly.
+3. Either [knit the entire document to pdf] or [knit to HTML or Word and print to pdf].
+4. Submit the pdf file to CourseSpaces in the Assignment 2 activity.
+
+### Data Description:
+Question 10.3.3  
+
+In a study of factors thought to be related to patterns of admission to a large general
+hospital, an administrator obtained these data on 10 communities in the
+hospital's cachment area.
+
+AdRate: (Y) Admission Rate, Number of hospital admissions per 1000 population.
+
+OHealth: (X1) Index of availability of other health services.  Larger values mean more
+health services.
+
+SESI:  (X2) Mean socio-economic status index.  Larger values (here) mean less wealthy.
+
+0.  Read the data into R using the read.csv function. 
+```{r OptionsReadIn}
+knitr::opts_chunk$set(fig.width=8, fig.height=6) #set size of graphs
+HOSP.dat<-read.csv('EXR_C10_S03_03.csv')
+dim(HOSP.dat)
+```
+
+1.  Provide descriptive statistics for the data.  Comment on your results and especially on any unusual features in the data. (3 marks)
+```{r SummaryStats}
+summary(HOSP.dat)
+
+```
+Comment:<br>
+There are 10 data record. The Range of AdRate is from 44 to 72.7, the Range of OHealth is from 4.4 to 9.7, the Range of SESI is from 2.8 to 7.9. OHealth and SESI are looks like skewed to right.
+
+<hr>
+2. Produce the pairs() scatterplots of all three variables.  Comment.  Is a linear model appropriate for this data?  Why or why not? (3 marks)
+```{r Pairs}
+pairs(HOSP.dat)
+```
+Comment: <br>
+We can see from the graph, the AdRate VS OHealth seems has an positive linear relationship,there is weakly positive relationship. the Ohealth has negatively relationship with SESI.  
+
+In general, the scattler plot shows there is a weakly positive relationship between AdRate vs Ohealth and SESI.
+
+<hr>
+3.	Fit simple linear models, Y versus X for each of the two X regressor variables. 
+Compare the Multiple R-squared and Residual standard error for the two models.  Comment. (3 marks)
+```{r Uni}
+y<-HOSP.dat$AdRate
+x1<-HOSP.dat$OHealth
+x2<-HOSP.dat$SESI
+
+fit1<-lm(y~x1)
+fit2<-lm(y~x2)
+#fit3<-lm(y~x1+x2)
+summary(fit1)
+summary(fit2)
+#summary(fit3)
+
+```
+Comment:<br>
+First model: AdRate VS OHealth 
+Model:y=36.670+2.931*x1
+
+Multiple R-squared:0.4711
+Residual standard error:6.692
+
+
+Second model: AdRate VS SESI
+Model:y=55.8027+0.2441*x1
+
+Multiple R-squared:0.001973
+Residual standard error:9.192
+
+
+Although for the model1, R_square is 0.4711 shows there are 47.11% of variation in y is explained by variation in x. However, it is clearly to see that the R_square for model2 is only 0.001973 shows there are only 0.1973% of variation in y is explained by variation in x which is extremly low and the residual standard error of model2 is higher then model1.Thus the second model (AdRate vs SESI) is not a good fitness model.
+
+<hr>
+4.	Fit the multiple linear regression model of Y on all of the X’s.
+    a. What is the estimated regression model? (2 marks)
+    b. What is the hypothesis tested by the F-test.  Comment on the results of the F-test. (2 marks)
+    c. Compare the R-squared, adjusted R-squared and the Residual standard error with those obtained from the simple linear regression models above. (3 marks)
+    d. Comment on the statistical significance of each of the X variables in the model.(3 marks)
+
+```{r Mult}
+fit3<-lm(y~x1+x2)
+summary(fit3)
+```
+Comment:
+<br>
+a):
+Model:AdRate=13.449+4.017*OHealth+2.812*SESI+error
+<br>
+<br>
+b):
+F-test: 
+H0:beta_Ohealth=beta_SESI=0
+As we can see that the p-value is lower then 0.05, so strong eveidence against H0, at least one of the beta_Ohealth and beta_SESI is not zero.
+<br>
+<br>
+c):
+The multiple R-squared and Adjusted R-Square of multivariable regression model are 0.6682 and 0.5734 which are larger then any simple linear regression r-square. This is expected with we add both varable into the model. The resudual standard error are also smaller then both two simple variable model, Therefore, both Ohealth and SESI are needed for explaining the varibale AdRate.
+<br>
+<br>
+d):
+X1(Ohealth) is very significant since the p-value is 0.00718<0.05 and the x2(SESI) is less siginificant since the p-value is 0.08076 <0.1.
+<br>
+<br>
+e). Generate 95% confidence intervals for each of the slope parameters.  Comment. (3 marks)
+```{r ConfInt}
+ confint(fit3)
+```
+The x1(Ohealth) do not contain the zero but x2(SESI) contain the zero, which reflect the result of the p-value. The X1 is significant and x2 is less(marginarlly) significant.
+<br>
+
+
+
+f). Check the fit of the model and comment. (3 marks)
+```{r CheckFit}
+par(mfrow=c(2,2))
+plot(fit3)
+
+```
+Comment:<br>
+As from the Residuals vs Fitted graph we can clearly see that there are some residuals are outliers in the line, the red line are seems around the zero.
+The Normall Q-Q plot indicates good agreement with the assumption of normality.
+The scale location looks a negative smooth line and the residuals vs leverage is not shows the smooth line around zero. 
+
+Overall the plot shows there are some outliers in the model but there are only 10 data in the data set, so we need more data to fix the model.
+
+<br>
+g). Explain each of the estimated regression parameter estimates (except the intercept) in words. (3 marks)
+
+Ohealth: The estimated expected AdRate increases by 4.017 per unit increase in Ohealth, with SESI held fixed.
+SESI: The estimated expected AdRate increases by 2.812 per unit increase in SESI, with Ohealth held fixed.
+
+
+
+
+
+
+
+
+
+

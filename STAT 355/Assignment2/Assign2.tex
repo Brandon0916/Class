@@ -1,0 +1,430 @@
+\documentclass[11pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=3cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Stat355, Assignment \#2, due: Friday, October 4 in class},
+            pdfauthor={Zimeng Ming V00844078},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Stat355, Assignment \#2, due: Friday, October 4 in class}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Zimeng Ming V00844078}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{2019-10-02}
+
+
+\begin{document}
+\maketitle
+
+\subsection{Multiple regression, Section 10.1 -
+10.3}\label{multiple-regression-section-10.1---10.3}
+
+\subsubsection{Instructions:}\label{instructions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Complete your assignment in R Markdown using this file as a template.
+  Insert R code in the R chunks, and type in your response after the
+  corresponding R chunk leaving one blank line between the R chunk and
+  your comments.
+\item
+  Execute each line of code separately to ensure that it works properly.
+\item
+  Either {[}knit the entire document to pdf{]} or {[}knit to HTML or
+  Word and print to pdf{]}.
+\item
+  Submit the pdf file to CourseSpaces in the Assignment 2 activity.
+\end{enumerate}
+
+\subsubsection{Data Description:}\label{data-description}
+
+Question 10.3.3
+
+In a study of factors thought to be related to patterns of admission to
+a large general hospital, an administrator obtained these data on 10
+communities in the hospital's cachment area.
+
+AdRate: (Y) Admission Rate, Number of hospital admissions per 1000
+population.
+
+OHealth: (X1) Index of availability of other health services. Larger
+values mean more health services.
+
+SESI: (X2) Mean socio-economic status index. Larger values (here) mean
+less wealthy.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  Read the data into R using the read.csv function.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{fig.width=}\DecValTok{8}\NormalTok{, }\DataTypeTok{fig.height=}\DecValTok{6}\NormalTok{) }\CommentTok{#set size of graphs}
+\NormalTok{HOSP.dat<-}\KeywordTok{read.csv}\NormalTok{(}\StringTok{'EXR_C10_S03_03.csv'}\NormalTok{)}
+\KeywordTok{dim}\NormalTok{(HOSP.dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10  3
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Provide descriptive statistics for the data. Comment on your results
+  and especially on any unusual features in the data. (3 marks)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(HOSP.dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      AdRate         OHealth          SESI      
+##  Min.   :44.00   Min.   :4.40   Min.   :2.800  
+##  1st Qu.:52.45   1st Qu.:5.10   1st Qu.:4.525  
+##  Median :53.65   Median :7.15   Median :5.900  
+##  Mean   :57.16   Mean   :6.99   Mean   :5.560  
+##  3rd Qu.:64.08   3rd Qu.:8.85   3rd Qu.:6.600  
+##  Max.   :72.70   Max.   :9.70   Max.   :7.900
+\end{verbatim}
+
+Comment: There are 10 data record. The Range of AdRate is from 44 to
+72.7, the Range of OHealth is from 4.4 to 9.7, the Range of SESI is from
+2.8 to 7.9. OHealth and SESI are looks like skewed to right.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Produce the pairs() scatterplots of all three variables. Comment. Is a
+  linear model appropriate for this data? Why or why not? (3 marks)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pairs}\NormalTok{(HOSP.dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Assign2_files/figure-latex/Pairs-1.pdf} Comment: We can
+see from the graph, the AdRate VS OHealth seems has an positive linear
+relationship,there is weakly positive relationship. the Ohealth has
+negatively relationship with SESI.
+
+In general, the scattler plot shows there is a weakly positive
+relationship between AdRate vs Ohealth and SESI.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Fit simple linear models, Y versus X for each of the two X regressor
+  variables. Compare the Multiple R-squared and Residual standard error
+  for the two models. Comment. (3 marks)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y<-HOSP.dat}\OperatorTok{$}\NormalTok{AdRate}
+\NormalTok{x1<-HOSP.dat}\OperatorTok{$}\NormalTok{OHealth}
+\NormalTok{x2<-HOSP.dat}\OperatorTok{$}\NormalTok{SESI}
+
+\NormalTok{fit1<-}\KeywordTok{lm}\NormalTok{(y}\OperatorTok{~}\NormalTok{x1)}
+\NormalTok{fit2<-}\KeywordTok{lm}\NormalTok{(y}\OperatorTok{~}\NormalTok{x2)}
+\CommentTok{#fit3<-lm(y~x1+x2)}
+\KeywordTok{summary}\NormalTok{(fit1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = y ~ x1)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.545 -4.878  1.807  4.273  7.596 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)   36.670      7.963   4.605  0.00174 **
+## x1             2.931      1.098   2.669  0.02840 * 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.692 on 8 degrees of freedom
+## Multiple R-squared:  0.4711, Adjusted R-squared:  0.4049 
+## F-statistic: 7.125 on 1 and 8 DF,  p-value: 0.0284
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(fit2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = y ~ x2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -13.267  -5.135  -3.312   6.826  15.237 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)  55.8027    11.1771   4.993  0.00106 **
+## x2            0.2441     1.9411   0.126  0.90302   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 9.192 on 8 degrees of freedom
+## Multiple R-squared:  0.001973,   Adjusted R-squared:  -0.1228 
+## F-statistic: 0.01582 on 1 and 8 DF,  p-value: 0.903
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#summary(fit3)}
+\end{Highlighting}
+\end{Shaded}
+
+Comment: First model: AdRate VS OHealth Model:y=36.670+2.931*x1
+
+Multiple R-squared:0.4711 Residual standard error:6.692
+
+Second model: AdRate VS SESI Model:y=55.8027+0.2441*x1
+
+Multiple R-squared:0.001973 Residual standard error:9.192
+
+Although for the model1, R\_square is 0.4711 shows there are 47.11\% of
+variation in y is explained by variation in x. However, it is clearly to
+see that the R\_square for model2 is only 0.001973 shows there are only
+0.1973\% of variation in y is explained by variation in x which is
+extremly low and the residual standard error of model2 is higher then
+model1.Thus the second model (AdRate vs SESI) is not a good fitness
+model.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Fit the multiple linear regression model of Y on all of the X's.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    What is the estimated regression model? (2 marks)
+  \item
+    What is the hypothesis tested by the F-test. Comment on the results
+    of the F-test. (2 marks)
+  \item
+    Compare the R-squared, adjusted R-squared and the Residual standard
+    error with those obtained from the simple linear regression models
+    above. (3 marks)
+  \item
+    Comment on the statistical significance of each of the X variables
+    in the model.(3 marks)
+  \end{enumerate}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit3<-}\KeywordTok{lm}\NormalTok{(y}\OperatorTok{~}\NormalTok{x1}\OperatorTok{+}\NormalTok{x2)}
+\KeywordTok{summary}\NormalTok{(fit3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = y ~ x1 + x2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.7005 -4.0547 -0.7874  4.6833  6.6122 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)   13.449     13.232   1.016  0.34325   
+## x1             4.017      1.071   3.749  0.00718 **
+## x2             2.812      1.379   2.040  0.08076 . 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.666 on 7 degrees of freedom
+## Multiple R-squared:  0.6682, Adjusted R-squared:  0.5734 
+## F-statistic: 7.049 on 2 and 7 DF,  p-value: 0.02104
+\end{verbatim}
+
+Comment: a): Model:AdRate=13.449+4.017\emph{OHealth+2.812}SESI+error
+---------------------------------------------- b): F-test:
+H0:beta\_Ohealth=beta\_SESI=0 As we can see that the p-value is lower
+then 0.05, so strong eveidence against H0, at least one of the
+beta\_Ohealth and beta\_SESI is not zero.
+---------------------------------------------- c): The multiple
+R-squared and Adjusted R-Square of multivariable regression model are
+0.6682 and 0.5734 which are larger then any simple linear regression
+r-square. This is expected with we add both varable into the model. The
+resudual standard error are also smaller then both two simple variable
+model, Therefore, both Ohealth and SESI are needed for explaining the
+varibale AdRate. ----------------------------------------------- d):
+X1(Ohealth) is very significant since the p-value is
+0.00718\textless{}0.05 and the x2(SESI) is less siginificant since the
+p-value is 0.08076 \textless{}0.1.
+----------------------------------------------\\
+e. Generate 95\% confidence intervals for each of the slope parameters.
+Comment. (3 marks)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{confint}\NormalTok{(fit3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   2.5 %    97.5 %
+## (Intercept) -17.8384294 44.736887
+## x1            1.4834367  6.550159
+## x2           -0.4480924  6.071601
+\end{verbatim}
+
+The x1(Ohealth) do not contain the zero but x2(SESI) contain the zero,
+which reflect the result of the p-value. The X1 is significant
+
+\begin{longtable}[]{@{}r@{}}
+\toprule
+\begin{minipage}[t]{0.62\columnwidth}\raggedleft\strut
+f. Check the fit of the model and comment. (3 marks)\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{verbatim}
+g. Explain each of the estimated regression parameter estimates (except the intercept) in words. (3 marks)
+\end{verbatim}
+
+
+\end{document}

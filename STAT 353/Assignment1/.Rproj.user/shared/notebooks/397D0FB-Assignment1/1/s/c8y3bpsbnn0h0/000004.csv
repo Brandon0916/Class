@@ -1,0 +1,3 @@
+"0","anscombe<-read.table(""anscombe.txt"",header = T)"
+"0","#plot the 1x 1y"
+"0","plot(anscombe$Set1x,anscombe$Set1y,xlab = ""set1x"",ylab = ""set1y"",main = ""Set1 x vs y "")"

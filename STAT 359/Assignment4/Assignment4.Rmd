@@ -1,0 +1,109 @@
+---
+title: "Assignment 4"
+author: "Zimeng Ming V00844078"
+date: "2019/3/28"
+output: html_document
+---
+
+Question1: 
+
+First of all, we load the data to the system:
+```{r}
+geriatric<-read.table("geriatric.txt",header = T)
+summary(geriatric)
+```
+
+
+Q1:
+Fit a possion regression model
+```{r}
+#according to the question:
+x1=geriatric$Int
+x2=geriatric$Sex
+x3=geriatric$BI
+x4=geriatric$SI
+y=geriatric$Fall
+
+fit1<-glm(y~x1+x2+x3+x4,family = poisson)
+summary(fit1)
+```
+
+So for Intervention, The Estimate corfficients is -1.069403, The Estimate standard errors is 0.133154 
+
+So for Sex, The Estimate corfficients is -0.046606, The Estimate standard errors is 0.119970
+
+So for Balance index, The Estimate corfficients is 0.009470, The Estimate standard errors is 0.002953
+
+So for Strength index, The Estimate corfficients is 0.008566, The Estimate standard errors is 0.004312
+
+The estimate response function u=exp(0.489467-1.069403*Intervention - 0.046606*Sex+0.009470*Balance Index +0.008566*Strength index)
+
+
+<hr>
+b):
+```{r}
+#According the summary from a), we know the residual deviance is 108.79, the degree of freedom is 95
+#To calculate the p-value for the deviance goodness of fit test we need to calculate the p-value for the chi-squared distribution. 
+cat("The model deviance is ", fit1$deviance,'\n')
+pchi_fit1<-1-pchisq(fit1$deviance,df=fit1$df.residual,lower.tail = F)
+cat("The p-value is",pchi_fit1)
+```
+
+The null hypothesis is the model is fitted. Since the P-value are large, we have little evidence to aginst null hypothesis. Thus we do not have sufficient evidence to say the model is not fitted. 
+
+<hr>
+c):
+```{r}
+plot(residuals(fit1))
+```
+
+There is no outliers shows on the graph. It seems looks like all data are normal.
+<hr>
+d):
+```{r}
+#so if we want test the hypothesis that sex can be dropped from the model, we first update the regression model and delete sex from the model 
+
+fit2<-update(fit1,~.-x2)
+summary(fit2)
+
+```
+
+Now for the AIC test: 
+```{r}
+cat("fit1 AIC=", fit1$aic, " deltaAIC=", fit1$aic-min(fit1$aic,fit2$aic),'\n')
+cat("fit2 AIC=", fit2$aic, " deltaAIC=", fit2$aic-min(fit1$aic,fit2$aic))
+```
+
+for the deivence test:
+```{r}
+anova(fit2,fit1,test = "Chi")
+```
+
+Here we can see from the two tests above, The deltaAIC for fit2 is 0, and the P-value for the deivence test is very large. There the evidence shows that little eveidence agiainst the hypothessis that the coefficient of sex is 0. So the sex can be dropped from the model.
+
+<hr>
+e):
+```{r}
+#the model without X2 is fit2. 
+summary(fit2)
+```
+From the summary above, we know the Beta1 is -1.077770 and the Standard Error is 0.131415
+
+
+```{r}
+cat("The 95% confidence interval is", '\n', cbind(-1.077770-1.96*0.131415,-1.077770+1.96*0.131415))
+```
+The interpret confidence interval is 95% and the confidence interval do not contain the 0, so also improve that the sex can be dropped.
+
+<hr>
+f):
+now we consider two fit models. 
+For the first model with the sex, we know from the above question that the sex can be removed from the model, so we use fit2(without sex) model
+
+For the model without Sex 
+```{r}
+exp(fit2$coefficients)
+```
+
+So the estimated risk is 0.3403536 when the Strength and Balance get controlled, and the aerobic exercise is negatively assocaited with frequency of falls since the correlation is negative(-1.077770).
+

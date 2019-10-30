@@ -1,0 +1,132 @@
+---
+title: "Assignment1"
+author: "Zimeng Ming V00844078"
+date: "2019/1/22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Question2: 
+
+a):
+```{r}
+Question1_data<-read.table("Question1.txt",header = T)
+
+Question1_data
+
+```
+
+b): Sort the data by plant growth
+
+```{r}
+attach(Question1_data)
+
+Question1_data_sorted <- cbind(growth[order(Question1_data$growth)],trt[order(Question1_data$growth)],plot[order(Question1_data$growth)],pot[order(Question1_data$growth)])
+
+Question1_data_sorted
+```
+
+c)Mean and deviation:
+```{r}
+print("The mean for the growth is: ")
+mean(growth)
+
+print("The Standard Deviation of the sample is :")
+sqrt(var(growth))
+```
+
+d) Plot the data
+```{r}
+hist(growth,main="The Histogram of Plant Growth(mm)",xlab = "Growth(mm)",breaks = 10,xlim = c(5,26) )
+```
+
+
+
+Question3: 
+The sum of the squares of a vector
+```{r}
+sum_of_squares<-function(y){
+  
+  y_square=0
+  #using for loop to calculate the sum square of (Y[i]-mean)
+  for(i in 1:length(y)){
+    y_square=(y[i])^2+y_square
+  }
+  #using the sqyares formula.
+  y_square-(length(y)*((sum(y)/length(y)))^2)
+  
+}
+
+#Test the data
+y<-c(11,11,10,8,11,3,15,11,7,6)
+sum_of_squares(y)
+
+
+
+```
+
+However, for this question, I have different answers for the code using to calculate the variance. 
+  sum_of_squares<-function(y){
+  y_square=0
+  #using for loop to calculate the sum square of (Y[i]-mean)
+  for(i in 1:length(y)){
+  y_square=(y[i]-mean(y))^2+y_square
+  }
+  #using the sqyares formula.
+  y_square/(length(y)-1)
+  }
+  #Test the data
+  y<-c(11,11,10,8,11,3,15,11,7,6)
+  sum_of_squares(y)
+  ## [1] 11.34444
+
+But I do not know what is wrong with my code. I could not find a way that using the formula of sum of sequares that can get accurate variance. 
+
+
+
+
+
+
+Question4:
+```{r}
+power.t.test(delta = 6,sd=3,sig.level = 0.05,power = 0.8,type = "one.sample")
+```
+
+so the sample size required is 5.
+
+Question5:
+
+```{r}
+#for the function, we use n=z^2*s^2/d^2 where z is confidence interval, s is standard deviation and d is margin of error. 
+
+Population_via_CI<-function(CI, margin_of_error,standard_deviation){
+  #set the value for Confidence Interval
+  z<-qt(CI,df = Inf)
+  
+  #set margin of error
+  d<-margin_of_error
+  
+  #set the standard deviation
+  s<-standard_deviation
+  
+  #calculate the population
+  ((z/d)^2)*(s^2)
+  
+  
+  
+}
+
+
+```
+
+
+Question6:
+```{r}
+Population_via_CI(0.95,2,3)
+```
+
+So the answer is n=7.

@@ -1,0 +1,2 @@
+"0","#plot the 1x 1y"
+"0","plot(anscombe$Set2x,anscombe$Set2y,xlab = ""set2x"",ylab = ""set2y"",main = ""Set2 x vs y "")"

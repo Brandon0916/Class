@@ -1,0 +1,100 @@
+---
+title: 'Stat355, Assignment #3, due: Friday, October 18 in class'
+author: "Put your name"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  word_document: default
+  html_document:
+    df_print: paged
+graphics: yes
+indent: yes
+geometry: left=1.5cm,right=1.5cm,top=2cm,bottom=3cm
+fontsize: 11pt
+---
+
+## Multiple regression and Dummy Variables, Section 11.2
+
+### Instructions:
+1. Complete your assignment in R Markdown using this file as a template.
+Insert R code in the R chunks, and type in your response after the
+corresponding R chunk leaving one blank line between the R chunk and
+your comments. 
+2. Execute each line of code separately to ensure that it works properly.
+3. Either [knit the entire document to pdf] or [knit to HTML or Word and print to pdf].
+4. Submit the pdf file to CourseSpaces in the Assignment 3 activity.
+
+### Data Description:
+Question 11.Review.15(new book)  11.Review.17(old book)
+
+In a study, subjects were preterm infant with low birth weights born in
+three different hospitals.  The variables are:   
+
+    WEIGHT:  weight in kg  (Y variable)  
+    WEEKS:  gestation age in weeks  
+    HOSP:  Hospital of birth, A, B or C  
+
+0.  Read the data into R using the read.csv function. 
+```{r OptionsReadIn}
+knitr::opts_chunk$set(fig.width=8, fig.height=6) #set size of graphs
+HOSPB<-read.csv('REV_C11_17.csv')
+dim(HOSPB)
+HOSPB$HOSPn <- as.numeric(HOSPB$HOSP)  #create a numeric HOSP for plotting
+```
+
+<header> Questions: </header>
+
+1.  Provide descriptive statistics and a pairs plot for the data.  
+Comment on your results and especially on any unusual features in the data. (3 marks)
+```{r SummaryPairs}
+
+```
+
+
+2.  Provide summary statistics of the dataset by HOSP and comment.  (3 marks)
+```{r byHOSP}
+
+```
+
+
+3.  Provide a scatterplot of WEIGHT versus WEEKS, using a different plotting
+character and colour for each of the three hospitals.  Comment on the graph. (2 marks)
+```{r Scatter}
+
+
+```
+
+
+4.	Fit parallel lines model for WEIGHT versus WEEKS, where the intercepts may differ
+by HOSP but the slopes are the same.  Provide a summary of the model and comment. (4 marks)
+```{r Parallel}
+
+```
+
+
+5.	Fit a model for WEIGHT versus WEEKS, where the intercepts and slopes may differ
+by HOSP.  Provide a summary of the model and comment. (4 marks)
+```{r DifSlopes}
+
+```
+
+
+6.  Provide a scatterplot of WEIGHT versus WEEKS, using a different plotting
+character and colour for each of the three hospitals.  Overlay the fitted lines from
+the model in Question 5. (2 marks)
+```{r DifSlopesScatter}
+
+```
+
+7.  Compare the models in Questions 4 and 5.  Which one model would you present to your boss and why? (3 marks)
+
+
+
+
+
+
+
+
+
+
+

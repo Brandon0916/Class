@@ -1,0 +1,125 @@
+---
+title: 'Stat355, Assignment #1, due: Sep 20 in class'
+author: "Zimeng Ming V00844078"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+graphics: yes
+indent: yes
+geometry: left=1.5cm,right=1.5cm,top=2cm,bottom=3cm
+fontsize: 11pt
+---
+###Instructions:
+1. Complete your assignment in R Markdown using this file as a template.
+Insert R code in the R chunks, and type in your response after the
+corresponding R chunk leaving one blank line between the R chunk and
+your comments.
+2. Execute each line of code separately to ensure that it works properly.
+3. Either [knit the entire document to pdf] or [knit to HTML or Word and print to pdf].
+4. Submit the pdf file to CourseSpaces in the Assignment 1 activity.
+
+###Data Description:
+Does fidgeting keep you slim?  Surprisingly, some people do not gain weight
+even when they overeat.  Perhaps fidgeting 
+and other *nonexercise activity* (NEA)
+explains why. Some people may spontaneously increase their nonexercise activity
+when fed more.  Researchers deliberately overfed 16 healthy young adult
+volunteers for eight weeks.  They measured fat gain (in kilograms, kg) and,
+as an explanatory variable, NEA change, change in energy use (in calories, Cal) from
+activity other than deliberate exercise (fidgeting, daily living, etc.)
+
+0.  Read in the data and check the dimension of the dataframe.
+Copy the file called NEA.csv from the CourseSpaces assignments folder into your 
+working directory.  The working directory is the folder that appears in your
+'Files' window of RStudio.
+```{r}
+oldop<-options(digits=5)   #set the number of digits to display
+NEA.dat <- read.csv('NEA.csv')
+dim(NEA.dat)
+head(NEA.dat)
+tail(NEA.dat)
+```
+
+1.  Provide summary statistics for the data and comment on the results
+ noting any unusual features in the data.  
+
+```{r summary}
+summary(NEA.dat)
+
+```
+Comments: 
+The median of NEA change is higher then the mean of Nea Change and the median of the fatGain is lower then the mean of the FatGain. 
+
+<hr>
+
+
+2. Produce an **appropriate** scatterplot for the data.
+(Carefully choose which variables should be on the vertical and horizontal axes.)
+Is a linear model appropriate for the data?  Comment on the graph.
+
+```{r scatterplot}
+
+plot(NEA.dat$FatGainKg,NEA.dat$NEAChangeCal,main = "Scatterplot for the NEA Change vs Fat Gain", ylab="NEA Change,Cal",xlab="Fat Gain,kg")
+
+```
+Comment:
+It looks like a negative linear model appropriate for the data.
+<hr>
+
+3.  Fit a linear model to the data, i.e. compute Least Squares estimates 
+of the slope and the intercept.  What is the estimated regression line?
+
+
+```{r linear}
+NEA.lm<-lm(NEA.dat$NEAChangeCal~NEA.dat$FatGainKg)
+NEA.lm
+summary(NEA.lm)
+```
+Comment:
+The estimate regression line: NEAChangeCal=745-176*FAtGainkg 
+beta0=745, beta1=-176
+
+<hr>
+4.  Generate confidence intervals for the slope and intercept.  Comment.
+
+```{r conf}
+NEA.lnconfid<-confint(NEA.lm)
+NEA.lnconfid
+```
+
+The confidence intervals for the intercept:(531.24,959.286)
+The confidence intervals for the slope: (-257.51, -94.748)
+
+<hr>
+
+5.  Provide a summary of the linear model fit and perform a test of 
+the hypothesis that the slope parameter is zero including your comment.
+
+```{r}
+summary(NEA.lm)
+```
+Comment:
+null hypothesis for the t-test: 
+
+For the intercept:  H0: beta0 =0, since the p-value is small thus there is significant eveidence to aginst h0, we conclude there is no evidence shows the beta0 =0.
+
+For the slope: H0:beta1=0, since the p-value is small thus there is significant eveidence to aginst h0, we conclude there is no evidence shows the beta1 =0. There is a significant linear relationship between NEA change and Fat Gain.
+
+for the F test, H0:beta1=0, since the p-value is small thus there is significant eveidence to aginst h0, we conclude there is no evidence shows the beta1 =0. There is a significant linear relationship between NEA change and Fat Gain.
+
+
+
+
+```{r echo=FALSE}
+options(oldop)  #reset the number of digits to display
+```
+
+Reference:  Levine, J.A., Eberhardt, N., Jensen, M.D. (1999) "Role of
+nonexercise activity thermogenesis in resistance to fat gain in humans",
+*Science*, 283, 212-214.
+
+
+

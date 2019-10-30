@@ -1,0 +1,3 @@
+"0","#get the linear model of set 4"
+"0","set4_lm<-lm(anscombe$Set4y~anscombe$Set4x)"
+"0","abline(set4_lm)"

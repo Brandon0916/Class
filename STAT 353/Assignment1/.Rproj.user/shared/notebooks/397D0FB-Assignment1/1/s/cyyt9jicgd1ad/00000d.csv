@@ -1,0 +1,2 @@
+"0","#As for the logarithm of payout against the product of the interest rate and maturity"
+"0","plot(payout$Int*payout$Time,log(payout$Payout),xlab = ""product of interst rate and time"",ylab = ""Logarithm of payout"", main = ""Product of interest rate and time vs log(payout)"", text(payout$Int*payout$Time,log(payout$Payout),log(payout$Payout),cex = 0.3,offset = 8))"

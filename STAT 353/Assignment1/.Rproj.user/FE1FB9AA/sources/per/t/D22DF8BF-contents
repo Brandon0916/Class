@@ -1,0 +1,239 @@
+---
+title: "STAT 353 Assignment1"
+author: "Zimeng Ming V00844078"
+date: "2019/9/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Question 2 (Q1.2)
+```{r}
+#get the data into the R
+payout<-read.table("payout.txt",header = T)
+#first we plot the scatter plots of the payout with explanatory variables.
+plot(payout$Prin,payout$Payout,xlab = "Principle",ylab = "Payout",main="Scatter plot of Principle vs Payout")
+```
+
+```{r}
+plot(payout$Int,payout$Payout,xlab = "Interst rate",ylab = "Payout",main="Scatter plot of Interst rate vs Payout")
+```
+```{r}
+plot(payout$Time,payout$Payout,xlab = "Time",ylab = "Payout",main="Scatter plot of Time vs Payout")
+```
+
+Comment: 
+As we can see from the above three plot, there is only one plot that the plot of "payout verus principle" looks having linear relationships, however, the other two plot do not present the clear linear relationship from the plot.
+
+
+
+```{r}
+#As for the logarithm of payout against the product of the interest rate and maturity
+plot(payout$Int*payout$Time,log(payout$Payout),xlab = "product of interst rate and time",ylab = "Logarithm of payout", main = "Product of interest rate and time vs log(payout)", text(payout$Int*payout$Time,log(payout$Payout),log(payout$Payout),cex = 0.3,offset = 8))
+```
+Comment:
+As we can see from above, the plot looks like having an linear relationship. There is three increasing linear model that indicate three logarithm payout level, log(2000), log(1500) and log(1000).
+
+<hr>
+
+Question 3(1.12) (on hand page)
+
+<hr>
+Question 4(2.2)(on hand page)
+
+<hr> 
+Question 5(2.3)
+a):
+```{r}
+anscombe<-read.table("anscombe.txt",header = T)
+#plot the 1x 1y
+plot(anscombe$Set1x,anscombe$Set1y,xlab = "set1x",ylab = "set1y",main = "Set1 x vs y ")
+#get the linear model of set 1
+set1_lm<-lm(anscombe$Set1y~anscombe$Set1x)
+abline(set1_lm)
+```
+
+```{r}
+#summary the model
+summary(set1_lm)
+```
+```{r}
+#anova of the model
+anova(set1_lm)
+```
+
+```{r}
+#correlation
+cor(anscombe$Set1x,anscombe$Set1y)
+#r square 
+cor(anscombe$Set1x,anscombe$Set1y)^2
+```
+Comment:
+Fitted line y=3.0001+0.5001x
+
+R_square: 0.6665425
+
+Correlation corfficient: 0.8164205
+
+We can conclude that there is an linear model appropriate for set1, there is 66.65% of variation in y is explained by variation of x.
+
+
+b):
+```{r}
+#plot the 1x 1y
+plot(anscombe$Set2x,anscombe$Set2y,xlab = "set2x",ylab = "set2y",main = "Set2 x vs y ")
+#get the linear model of set 1
+set2_lm<-lm(anscombe$Set2y~anscombe$Set2x)
+abline(set2_lm)
+
+#summary the model
+summary(set2_lm)
+#anova of the model
+anova(set2_lm)
+
+#correlation
+cor(anscombe$Set2x,anscombe$Set2y)
+#r square 
+cor(anscombe$Set2x,anscombe$Set2y)^2
+```
+Fitted line y=3.001+0.500x
+
+R_square: 0.666242
+
+Correlation corfficient: 0.8162365
+
+There is 66.62% of variation in y is explained by variation of x but we can clearly see from the graph, there is not looks like an linear relationship between x and y, the quadratic model might more suitable for the plot.
+
+c):
+```{r}
+#plot the 1x 1y
+plot(anscombe$Set3x,anscombe$Set3y,xlab = "set3x",ylab = "set3y",main = "Set3 x vs y ")
+#get the linear model of set 1
+set3_lm<-lm(anscombe$Set3y~anscombe$Set3x)
+abline(set3_lm)
+
+#summary the model
+summary(set3_lm)
+#anova of the model
+anova(set3_lm)
+
+#correlation
+cor(anscombe$Set3x,anscombe$Set3y)
+#r square 
+cor(anscombe$Set3x,anscombe$Set3y)^2
+```
+Comment:
+Fitted line y=3.0025+0.4997x
+
+R_square: 0.666324
+
+Correlation corfficient: 0.8162867
+
+We can conclude that there is an linear model appropriate for set3, there is 66.63% of variation in y is explained by variation of x.
+
+d):
+```{r}
+#plot the 1x 1y
+plot(anscombe$Set4x,anscombe$Set4y,xlab = "set4x",ylab = "set4y",main = "Set4 x vs y ")
+#get the linear model of set 4
+set4_lm<-lm(anscombe$Set4y~anscombe$Set4x)
+abline(set4_lm)
+
+#summary the model
+summary(set4_lm)
+#anova of the model
+anova(set4_lm)
+
+#correlation
+cor(anscombe$Set4x,anscombe$Set4y)
+#r square 
+cor(anscombe$Set4x,anscombe$Set4y)^2
+```
+Comment:
+Fitted line y=3.0017+0.4999x
+
+R_square: 0.6667073
+
+Correlation corfficient: 0.8165214
+
+There is 66.67% of variation in y is explained by variation of x but we can clearly see from the graph, there is not looks like an linear relationship between x and y.
+
+<hr>
+
+Problem6 (On hand)
+
+<hr>
+Problem7
+```{r}
+#As there is no data provide from course space, I create a csv file.
+cars<- read.csv("Cars.csv", header = T)
+cars
+
+```
+a):
+```{r}
+plot(cars$Average_number_of_Sales_People_on_duty,cars$Number_of_Cars_Sold,xlab = "Average_number_of_Sales_People_on_duty",ylab = "Number_of_Cars_Sold",main = "Scatter plot of the Car Sales")
+```
+
+b):
+```{r}
+y<-cars$Number_of_Cars_Sold
+x<-cars$Average_number_of_Sales_People_on_duty
+cars_lm<-lm(y~x)
+summary(cars_lm)
+```
+Comment: 
+The estimate Y intercept is -0.1250, and the slope of the line is 3.1250
+
+c):
+```{r}
+plot(cars$Average_number_of_Sales_People_on_duty,cars$Number_of_Cars_Sold,xlab = "Average_number_of_Sales_People_on_duty",ylab = "Number_of_Cars_Sold",main = "Scatter plot of the Car Sales")
+abline(cars_lm)
+```
+
+d):
+```{r}
+predict(cars_lm, newdata = data.frame(x=5))
+```
+Comment:
+According to the output, we can say that approximately 15 cars (15.5 cars so round to 15) should the dealer expected to sell in a week
+
+e)
+```{r}
+cars_lm$fitted.values
+cars_lm$residuals
+plot(cars_lm$fitted.values,cars_lm$residuals,xlab = "Fitted Values", ylab = "Residuals",main = "Residuals VS fitted Values")
+```
+
+Comment: 
+Residuals are above or blowe the zero with no clearly indicates, There is one residuals taht is -2.375 which are the most far away point from the zero, this point might not satisfied with the fit. However, there are only five data point in the plot and the R_square value are 0.9191 which is very large, thus we can kindly say the fit is satisfied.
+
+f):
+```{r}
+anova(cars_lm)
+```
+Comments:
+sigama_Square = 3.667
+
+g):
+```{r}
+confint(cars_lm)
+```
+Comment:
+The confidents interval for Beta1 is (1.421697, 4.828303) which do not include 0, so the beta1 is significant.
+
+h):
+
+Since the R_Square is 0.9191, which indicates that 91.91% of the variation in the number of cars sales can be explained by variation in number of sales people on duty. Therefore we can conclude that there exist a linear relationship between those two variables.
+
+i):
+The data period is from January 30th to June 29th, it do not have enough data to preict the data for next year. So i will not use this model to determine the number of sales people to have on duty next year.
+
+<hr>
+proplem 8
+
+As I can search from the web, some applet are very useful in the real problem application. It is very easy to see how the regression inetercept and slope changes when we adding or removing the points. Some applet can see the change in R_square dirctly, for example, if a data has a outlier that would reduce the r_square and r_square will increase when we remove it. It is very useful to help us to see the fitted model for the problems. 
+
+

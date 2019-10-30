@@ -1,0 +1,251 @@
+---
+title: "Assignement3"
+author: "Zimeng Ming V00844078"
+date: "2019/3/14"
+output: html_document
+---
+<hr>
+Question 1:
+
+```{r}
+#First of all, Read the data in the system.
+LungCancer<-read.csv("LungCancer.csv", header = T)
+
+plot(LungCancer)
+#using table() to find contingency
+#table(LungCancer)
+#for look nicely
+CancerTable<-table(LungCancer)
+colnames(CancerTable)<-c("non-smoker","smoker")
+rownames(CancerTable)<-c("NOT Lung Cancer", "Lung Cancer")
+CancerTable
+```
+
+
+a):
+For here, is clear that is the sign test
+so here we use the distribution of chi-square
+
+null-hypothesis H0: The Smoking and Lung Cancer are independent 
+HA:The Smoking and Lung Cancer are not independent 
+```{r}
+chisq.test(LungCancer$Case,LungCancer$Smoker)
+```
+
+As we can see from above, since the p-value is very small,less then 0.001, there is significant eveidence against H0, which we may conclude that The Smoking and Lung Caner are not independent. 
+
+b): The assumption is there is association between smoking and lung cancer. According to the result from (a), the assumption is valid. 
+
+<hr>
+Question2:
+first get the AIC function:
+```{r}
+#for fit1 is fit1<-lm(y,x)
+myAIC<-function(fit1){
+  #get the sum of squares 
+  b<-anova(fit1)
+  #using the AIC function
+  AIC<-length(fit1$residuals)*log((b$"Sum Sq"[2])/(length(fit1$residuals)))+2*(length(fit1$coefficients)+1)
+  return(AIC)
+  
+}
+
+
+
+```
+
+
+
+<hr>
+Question3:
+a):
+```{r}
+#first read the data
+anscombe<-read.csv('anscombe.csv', header=T)
+#in order to see the data, plot the data out but commend for the final output
+
+#anscombe
+```
+
+Then get the plot
+```{r}
+par(mfrow=c(2,2))
+plot(anscombe[,1],anscombe[,2],main="Set 1",xlab="x", ylab="y")
+plot(anscombe[,3],anscombe[,4] ,main="Set 2" ,xlab="x", ylab="y")
+plot(anscombe[,5],anscombe[,6] ,main="Set 3" ,xlab="x", ylab="y")
+plot(anscombe[,7],anscombe[,8] ,main="Set 4" ,xlab="x", ylab="y")
+
+```
+
+According to above plot, we can notice that for set1, The data are looks like a linear increasing model for x and y. it seems not or a few outliers. For Set2, it is looks like a quadratic model for x and y. For Set3, it is linear increasing model for x and y but with an significantly outlier in the graph. For Set 4, it is not an linear outlier in the graph. becuase there are so many y represent a x data. Howevere, there is an outlier on the right top corner it may have an significant influence on the modeling analysis.
+
+
+B)
+
+```{r}
+#first set the linear regression for the 4 datasets
+fit1<-lm(anscombe[,2]~anscombe[,1])
+fit2<-lm(anscombe[,4]~anscombe[,3])
+fit3<-lm(anscombe[,6]~anscombe[,5])
+fit4<-lm(anscombe[,8]~anscombe[,7])
+
+```
+
+
+```{r}
+#then summary the r square 
+
+cat("     Data Set             R^2 Values         AIC Values","\n","      1                  ",summary(fit1)$r.squared, "        ",myAIC(fit1),"\n","      2                  ",summary(fit2)$r.squared,"         ",myAIC(fit2),"\n","      3                  ",summary(fit3)$r.squared,"         ",myAIC(fit3),"\n","      4                  ",summary(fit4)$r.squared,"        ",myAIC(fit4),"\n")
+```
+
+According to the result from above, we can see that the R squared values and AIC Values are very close for 4 data sets. According to the analysis from a), we can notice that although that 4 data sets has different conditions for the data, such as outliers, shapes etc, but the linear association between x and y are very close in such different conditions. For instance, graph 3 and 4 which is set 3 and 4 has an siginificant outliers, but the linear association are close to the set which do not have a clearly outliers.
+
+In terms of AIC Valurs, It is similar but if there is an outlier in the data sets, we can see the linear association for x and y are a little bit lower then the set do not have an clearly outliers. 
+
+<hr>
+Question4:
+```{r}
+#First load the data in the system.
+beef<-read.table("beef.txt",header = T)
+#beef
+```
+
+```{r}
+#first plot the data  and see the relations for data sets.
+#here the par 
+par(mfrow=c(4,3))
+pairs(~beef$Year+beef$Beef.Consumption+beef$Price+beef$Income+beef$Pork.Consumption)
+#pairs(cbind(beef$Year,beef$Beef.Consumption,beef$Price,beef$Income,beef$Pork.Consumption))
+
+```
+As we can see from the above, beef consumption is looks has an clearly increase linear association with Income. It seems might have an increase linear association with price but it clearly do not have any linear relationship with pork consumption.
+
+know doing the linear model fit
+```{r}
+#for here we using Price as x1, Income as x2,Pork Consumption as X3 and Beef Consumption as Y
+x1<-beef$Price
+x2<-beef$Income
+x3<-beef$Pork.Consumption
+y<-beef$Beef.Consumption
+
+#then we using the model
+z1<-x1*x1
+z2<-x2*x2
+z3<-x3*x3
+
+fit_q4<-lm(y~x1+x2+x3+z1+z2+z3+x1:x2+x1:x3+x2:x3+x1:x2:x3)
+summary(fit_q4)
+```
+
+Here we can see that the P-value are very high. z1 and z2 are closing to 0.5 
+so here we only using income.
+```{r}
+fit2_q4<-lm(y~x1+x2+x3+z2)
+summary(fit2_q4)
+```
+However, we can see from here. That the p-value are very low and R-squared are close to 1. But the p-value for x2 and z2 are also very high. So We only use x1+x2+x3
+
+```{r}
+fit3_q4<-lm(y~x1+x2+x3)
+summary(fit3_q4)
+```
+Here the p-value for all of the x1 x2 x3 are very low and no strange p-vlaues. for the further check and fit the model, we using the following method to check:
+
+
+```{r}
+summary.lm(fit3_q4)
+
+```
+
+Also we using the AIC function to test residual sums of squares
+```{r}
+#anova for the AIC
+anova(fit3_q4)
+#AIC function
+AIC(fit3_q4)
+#extract AIC
+extractAIC(fit3_q4,0)
+```
+
+```{r}
+#backward selection
+step(fit3_q4, direction = "backward")
+```
+```{r}
+#then we get to the final model
+fit4_q4<-lm(y~x1+x2+x3)
+summary(fit4_q4)
+```
+
+```{r}
+#Partial F-tests
+anova(fit3_q4,fit4_q4)
+```
+Actuatlly, it is the same for fit3_q4 and fit4_q4
+
+```{r}
+#residual plots
+par(mfrow=c(2,2)) 
+plot(fit4_q4)
+```
+```{r}
+plot(fit4_q4$fitted.values,fit4_q4$residuals)
+abline(h=0)
+```
+
+```{r}
+#for qqplot
+qqnorm(fit4_q4$residuals) 
+qqline(fit4_q4$residuals)
+```
+
+```{r}
+#for confidence interval
+confint(fit4_q4)
+```
+
+In conclusion,The model for the question is Beef.Consumption=90.813646-1.849850*Price
++0.083190*Income-0.415085*Pork.Consumption
+
+
+<hr>
+Question5
+
+```{r}
+#read the data 
+
+Hospital<-read.csv("hospital.csv",header = T)
+Hospital
+stHospital<-stack(Hospital)
+names(stHospital)<-c("rate","hospital")
+boxplot(stHospital)
+```
+a) :The model we selected is one way anova. Because the data has rate and hospital two consideration. 
+
+b):
+H0:The true average ratings for each of the hospitals are equal
+HA:The true average ratings for each of the hospitals are not equal
+```{r}
+aov1<-aov(rate~hospital,data=stHospital)
+summary(aov1)
+```
+
+As we can see from above, The p-value is very small and less then 0.001, there is an strong evidence agianst H0,so there is significant evidence shows that the true average ratings for each of the hospitals are not equal.
+
+c):
+```{r}
+#plot the data
+par(mfrow=c(2,2))
+plot(aov1)
+```
+ 
+So as we can see that the plot information are support the aov result that the normal qq line is linear and residuals vs fitted are an straight line on 0 resuduals.
+
+D):
+```{r}
+#for the Tukey
+TukeyHSD(aov1)
+plot(TukeyHSD(aov1))
+```
+
+It is much more easier to see from the plot, The confidence interval of H3-H1,H4-H2 and H4-H3 do not contain 0, so there is an difference in mean in this 3 caculation. so those above has mean differ. 

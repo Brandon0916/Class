@@ -1,0 +1,1 @@
+"0","plot(payout$Int,payout$Payout,xlab = ""Interst rate"",ylab = ""Payout"",main=""Scatter plot of Interst rate vs Payout"")"

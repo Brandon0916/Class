@@ -1,0 +1,1 @@
+"0","plot(payout$Time,payout$Payout,xlab = ""Time"",ylab = ""Payout"",main=""Scatter plot of Time vs Payout"")"

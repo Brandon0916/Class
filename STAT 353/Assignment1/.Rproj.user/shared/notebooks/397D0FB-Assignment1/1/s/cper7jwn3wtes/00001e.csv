@@ -1,0 +1,4 @@
+"0","#get the data into the R"
+"0","payout<-read.table(""payout.txt"",header = T)"
+"0","#first we plot the scatter plots of the payout with explanatory variables."
+"0","plot(payout$Prin,payout$Payout,xlab = ""Principle"",ylab = ""Payout"",main=""Scatter plot of Principle vs Payout"")"

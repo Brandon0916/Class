@@ -1,0 +1,1 @@
+"0","plot(cars$Average_number_of_Sales_People_on_duty,cars$Number_of_Cars_Sold,xlab = ""Average_number_of_Sales_People_on_duty"",ylab = ""Number_of_Cars_Sold"",main = ""Scatter plot of the Car Sales"")"
