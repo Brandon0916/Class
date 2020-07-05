@@ -1,0 +1,370 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20194.19.1010.1202                               -->
+<workbook source-build='2019.4.0 (20194.19.1010.1202)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <MapboxVectorStylesAndLayers />
+    <SheetIdentifierTracking ignorable='true' predowngraded='true' />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='1' inline='true' name='federated.1lb3t6w13ab9yx1dhh86k17id64t' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='1' name='textscan.163oezt1tqlgxm177p0060epzdt6'>
+            <connection class='textscan' cleaning='yes' compat='no' csvFile='/Users/brandonming/Desktop/LeetCode/Covid19/TestScrp/COVID19_Data/BC/1.csv' dataRefreshTime='' directory='/Users/brandonming/Desktop/LeetCode/Covid19/TestScrp/COVID19_Data/BC' filename='/var/folders/_q/yybjd8v575d1rrgwsj7r51dr0000gn/T/tableau-temp/0imurn40xkj37y169r5ms0siw10d/1.csv.xlsx' interpretationMode='8' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.163oezt1tqlgxm177p0060epzdt6' name='1.csv' table='[/Users/brandonming/Desktop/LeetCode/Covid19/TestScrp/COVID19_Data/BC/1#csv]' type='table'>
+          <columns character-set='UTF-8' gridOrigin='A1:D1562:no:A1:D1562:1' header='yes' locale='zh_CN' separator=','>
+            <column datatype='date' name='Reported_Date' ordinal='0' />
+            <column datatype='string' name='HA' ordinal='1' />
+            <column datatype='string' name='Sex' ordinal='2' />
+            <column datatype='string' name='Age_Group' ordinal='3' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[1.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;zh_Hans_CN&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;￥&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:D1562:no:A1:D1562:1&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;zh_CN&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Reported_Date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[Reported_Date]</local-name>
+            <parent-name>[1.csv]</parent-name>
+            <remote-alias>Reported_Date</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HA</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HA]</local-name>
+            <parent-name>[1.csv]</parent-name>
+            <remote-alias>HA</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LZH_RCN' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Sex</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Sex]</local-name>
+            <parent-name>[1.csv]</parent-name>
+            <remote-alias>Sex</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LZH_RCN' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Age_Group</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Age_Group]</local-name>
+            <parent-name>[1.csv]</parent-name>
+            <remote-alias>Age_Group</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LZH_RCN' />
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <column datatype='string' name='[Age_Group]' role='dimension' semantic-role='' type='nominal' />
+      <column aggregation='None' datatype='string' name='[HA]' role='dimension' semantic-role='[City].[Name]' type='nominal'>
+        <semantic-values semantic-role='[Geographical].[Longitude]'>
+          <semantic-value key='&quot;Fraser&quot;' value='-122.9704' />
+          <semantic-value key='&quot;Interior&quot;' value='-119.595' />
+          <semantic-value key='&quot;Northern&quot;' value='-122.893' />
+          <semantic-value key='&quot;Vancouver Coastal&quot;' value='-123.2764' />
+          <semantic-value key='&quot;Vancouver Island&quot;' value='-123.358' />
+        </semantic-values>
+        <semantic-values semantic-role='[Geographical].[Latitude]'>
+          <semantic-value key='&quot;Fraser&quot;' value='49.255000000000003' />
+          <semantic-value key='&quot;Interior&quot;' value='49.899000000000001' />
+          <semantic-value key='&quot;Northern&quot;' value='53.926000000000002' />
+          <semantic-value key='&quot;Vancouver Coastal&quot;' value='49.178350000000002' />
+          <semantic-value key='&quot;Vancouver Island&quot;' value='48.469000000000001' />
+        </semantic-values>
+      </column>
+      <column aggregation='Sum' datatype='integer' name='[Number of Records]' role='dimension' type='ordinal' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <extract count='-1' enabled='false' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='zh_CN' class='hyper' dbname='/Users/brandonming/Documents/我的 Tableau 存储库/数据源/1.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='04/16/2020 05:49:48 AM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh>
+            <refresh-event add-from-file-path='1' increment-value='%null%' refresh-type='create' rows-inserted='1561' timestamp-start='2020-04-16 05:49:48.817' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Reported_Date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[Reported_Date]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Reported_Date</remote-alias>
+              <ordinal>0</ordinal>
+              <family>1.csv</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>52</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>HA</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[HA]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>HA</remote-alias>
+              <ordinal>1</ordinal>
+              <family>1.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LZH_RCN' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Sex</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Sex]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Sex</remote-alias>
+              <ordinal>2</ordinal>
+              <family>1.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>3</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LZH_RCN' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Age_Group</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Age_Group]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Age_Group</remote-alias>
+              <ordinal>3</ordinal>
+              <family>1.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>11</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LZH_RCN' />
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.580808' measure-ordering='alphabetic' measure-percentage='0.419192' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[City].[Name]' value='%null%' />
+        <semantic-value key='[Country].[Name]' value='&quot;加拿大&quot;' />
+        <semantic-value key='[State].[Name]' value='&quot;不列颠哥伦比亚&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <actions>
+    <action caption='突出显示 1 (已生成)' name='[Action1]'>
+      <activation auto-clear='true' type='on-select' />
+      <source type='sheet' worksheet='工作表 1' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='HA' />
+        <param name='target' value='工作表 1' />
+      </command>
+    </action>
+  </actions>
+  <worksheets>
+    <worksheet name='工作表 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='1' name='federated.1lb3t6w13ab9yx1dhh86k17id64t' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.1lb3t6w13ab9yx1dhh86k17id64t'>
+            <column datatype='string' name='[Age_Group]' role='dimension' semantic-role='' type='nominal' />
+            <column aggregation='None' datatype='string' name='[HA]' role='dimension' semantic-role='[City].[Name]' type='nominal'>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;Fraser&quot;' value='-122.9704' />
+                <semantic-value key='&quot;Interior&quot;' value='-119.595' />
+                <semantic-value key='&quot;Northern&quot;' value='-122.893' />
+                <semantic-value key='&quot;Vancouver Coastal&quot;' value='-123.2764' />
+                <semantic-value key='&quot;Vancouver Island&quot;' value='-123.358' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;Fraser&quot;' value='49.255000000000003' />
+                <semantic-value key='&quot;Interior&quot;' value='49.899000000000001' />
+                <semantic-value key='&quot;Northern&quot;' value='53.926000000000002' />
+                <semantic-value key='&quot;Vancouver Coastal&quot;' value='49.178350000000002' />
+                <semantic-value key='&quot;Vancouver Island&quot;' value='48.469000000000001' />
+              </semantic-values>
+            </column>
+            <column datatype='string' name='[Sex]' role='dimension' type='nominal' />
+            <column-instance column='[Sex]' derivation='Count' name='[cnt:Sex:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Age_Group]' derivation='None' name='[none:Age_Group:nk]' pivot='key' type='nominal' />
+            <column-instance column='[HA]' derivation='None' name='[none:HA:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[Latitude (generated)]' included-values='in-range' />
+          <filter class='categorical' column='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[none:Age_Group:nk]'>
+            <groupfilter function='level-members' level='[none:Age_Group:nk]' />
+          </filter>
+          <slices>
+            <column>[federated.1lb3t6w13ab9yx1dhh86k17id64t].[none:Age_Group:nk]</column>
+            <column>[federated.1lb3t6w13ab9yx1dhh86k17id64t].[Latitude (generated)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[Longitude (generated)]' field-type='quantitative' max='-12558573.751093715' min='-14843357.638012568' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[Latitude (generated)]' field-type='quantitative' max='8109933.1443864536' min='5949260.9825156089' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Multipolygon' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[none:HA:nk]' />
+              <text column='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[cnt:Sex:qk]' />
+              <geometry column='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[Geometry (generated)]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.14193369448184967' />
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1lb3t6w13ab9yx1dhh86k17id64t].[Latitude (generated)]</rows>
+        <cols>[federated.1lb3t6w13ab9yx1dhh86k17id64t].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{20AF8F11-62BD-448E-A53E-1D32D16318D2}' />
+    </worksheet>
+    <worksheet name='工作表 2'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{DF3445BB-3BDA-4290-AC32-2EBF90326765}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='工作表 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[Latitude (generated)]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card param='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[none:HA:nk]' type='highlighter' />
+            <card pane-specification-id='0' param='[federated.1lb3t6w13ab9yx1dhh86k17id64t].[none:HA:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='1' />
+      </viewpoint>
+      <simple-id uuid='{AB860A3C-44B4-4D51-9226-1D94D113DF97}' />
+    </window>
+    <window class='worksheet' name='工作表 2'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{552D8C74-F5B5-4BF9-93F1-84E4CA7D276B}' />
+    </window>
+  </windows>
+</workbook>
